@@ -38,7 +38,19 @@ class User(UserMixin, db.Model):
         return '<User %r>' % self.username
 
     def generate_confirmation_token(selfself, expiration=3600):
-        s =
+        s = Serializer(current_app.config['SECRET_KEY'], expiration)
+        return s.dumps({'confirm':self.id})
+
+    def confirm(self, token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+        except:
+            return False
+        if data.get('confirm') != self.id:
+            return False
+        self.confirmed = True
+        db.session.add()
 
 @login_manager.user_loader
 def load_user(user_id):
