@@ -1,3 +1,4 @@
+# coding:utf-8
 from flask import render_template, redirect, request, url_for, flash
 from flask.ext.login import login_user, logout_user, login_required, \
     current_user
@@ -36,6 +37,7 @@ def login():
             return redirect(request.args.get('next') or url_for('main.index'))
         flash('Invalid username or password.')
     return render_template('auth/login.html', form=form)
+#           render_template  等于  渲染模板（路径，文件，参数)
 
 
 @auth.route('/logout')
