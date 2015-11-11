@@ -1,5 +1,4 @@
-# coding: uft-8
-# 检查用户权限的自定义修饰器
+# coding:utf-8
 
 from functools import wraps
 from flask import abort
@@ -20,3 +19,5 @@ def permission_required(permission):
 
 def admin_required(f):
     return permission_required(Permission.ADMINISTER)(f)
+####
+###
