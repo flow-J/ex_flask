@@ -1,4 +1,3 @@
-# coding:utf-8
 from flask import render_template, redirect, url_for, abort, flash, request,\
     current_app
 from flask.ext.login import login_required, current_user
@@ -8,7 +7,7 @@ from .. import db
 from ..models import Permission, Role, User, Post
 from ..decorators import admin_required
 
-# 处理博客文章的首页路由
+
 @main.route('/', methods=['GET', 'POST'])
 def index():
     form = PostForm()
@@ -41,7 +40,7 @@ def user(username):
 
 @main.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
-def edit_profile(): # 资料编辑路由
+def edit_profile():
     form = EditProfileForm()
     if form.validate_on_submit():
         current_user.name = form.name.data
@@ -56,7 +55,6 @@ def edit_profile(): # 资料编辑路由
     return render_template('edit_profile.html', form=form)
 
 
-# 管理员-资料编辑路由
 @main.route('/edit-profile/<int:id>', methods=['GET', 'POST'])
 @login_required
 @admin_required
@@ -82,3 +80,9 @@ def edit_profile_admin(id):
     form.location.data = user.location
     form.about_me.data = user.about_me
     return render_template('edit_profile.html', form=form, user=user)
+
+
+@main.route('/post/<int:id>')
+def post(id):
+    post = Post.query.get_or_404(id)
+    return render_template('post.html', posts=[post])
