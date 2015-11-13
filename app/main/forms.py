@@ -9,6 +9,7 @@ from ..models import Role, User
 
 class NameForm(Form):
     name = StringField('What is your name?', validators=[Required()])
+    # name 用来存放表单中输入的有效名字，如果没有输入，其值为 None
     submit = SubmitField('Submit')
 
 
