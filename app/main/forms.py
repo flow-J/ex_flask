@@ -1,18 +1,17 @@
-# coding:utf-8
 from flask.ext.wtf import Form
 from wtforms import StringField, TextAreaField, BooleanField, SelectField,\
     SubmitField
 from wtforms.validators import Required, Length, Email, Regexp
 from wtforms import ValidationError
-from ..models import Role, User
 from flask.ext.pagedown.fields import PageDownField
+from ..models import Role, User
+
 
 class NameForm(Form):
     name = StringField('What is your name?', validators=[Required()])
     submit = SubmitField('Submit')
 
 
-#资料编辑表单
 class EditProfileForm(Form):
     name = StringField('Real name', validators=[Length(0, 64)])
     location = StringField('Location', validators=[Length(0, 64)])
@@ -20,7 +19,6 @@ class EditProfileForm(Form):
     submit = SubmitField('Submit')
 
 
-#资料编辑表单  管理员版
 class EditProfileAdminForm(Form):
     email = StringField('Email', validators=[Required(), Length(1, 64),
                                              Email()])
@@ -31,7 +29,7 @@ class EditProfileAdminForm(Form):
     confirmed = BooleanField('Confirmed')
     role = SelectField('Role', coerce=int)
     name = StringField('Real name', validators=[Length(0, 64)])
-    location = StringField('Location', validators=[Length(0, 64)])# validators验证器
+    location = StringField('Location', validators=[Length(0, 64)])
     about_me = TextAreaField('About me')
     submit = SubmitField('Submit')
 
@@ -41,21 +39,17 @@ class EditProfileAdminForm(Form):
                              for role in Role.query.order_by(Role.name).all()]
         self.user = user
 
-
-    # 验证email
     def validate_email(self, field):
         if field.data != self.user.email and \
                 User.query.filter_by(email=field.data).first():
             raise ValidationError('Email already registered.')
 
-    # 验证用户名
     def validate_username(self, field):
         if field.data != self.user.username and \
                 User.query.filter_by(username=field.data).first():
             raise ValidationError('Username already in use.')
 
 
-#博客文章表单
 class PostForm(Form):
     body = PageDownField("What's on your mind?", validators=[Required()])
     submit = SubmitField('Submit')
