@@ -13,5 +13,15 @@
     <tr>
         <td>
             <a href="{{ url_for('.user', username = follow.user.username) }}">
-                <img class="img-rounded">
+                <img class="img-rounded" src="{{ follow.user.gravatar(size=32) }}">
+                {{ follow.user.username }}
+            </a>
+        </td>
+        <td>{{ moment(follow.timestamp).format('L') }}</td>
     </tr>
+    {% endfor %}
+</table>
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, endpoint, username=user.username) }}
+</div>
+{% endblock %}
