@@ -1,3 +1,4 @@
+# coding:utf-8
 from flask.ext.wtf import Form
 from wtforms import StringField, TextAreaField, BooleanField, SelectField,\
     SubmitField
@@ -9,7 +10,7 @@ from ..models import Role, User
 
 class NameForm(Form):
     name = StringField('What is your name?', validators=[Required()])
-    # name 用来存放表单中输入的有效名字，如果没有输入，其值为 None
+    # name 鐢ㄦ潵瀛樻斁琛ㄥ崟涓緭鍏ョ殑鏈夋晥鍚嶅瓧锛屽鏋滄病鏈夎緭鍏ワ紝鍏跺�间负 None
     submit = SubmitField('Submit')
 
 
@@ -54,4 +55,3 @@ class EditProfileAdminForm(Form):
 class PostForm(Form):
     body = PageDownField("What's on your mind?", validators=[Required()])
     submit = SubmitField('Submit')
-123
