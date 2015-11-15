@@ -1,4 +1,3 @@
-# coding:utf-8
 from flask.ext.wtf import Form
 from wtforms import StringField, TextAreaField, BooleanField, SelectField,\
     SubmitField
@@ -10,7 +9,6 @@ from ..models import Role, User
 
 class NameForm(Form):
     name = StringField('What is your name?', validators=[Required()])
-    # name 用来存放表单中输入的有效名字，如果没有输入，其值为 None
     submit = SubmitField('Submit')
 
 
@@ -57,8 +55,6 @@ class PostForm(Form):
     submit = SubmitField('Submit')
 
 
-#评论输入表单
 class CommentForm(Form):
-    body = StringField('', validators=[Required()])
+    body = StringField('Enter your comment', validators=[Required()])
     submit = SubmitField('Submit')
-
