@@ -1,3 +1,4 @@
+# coding:utf-8
 from datetime import datetime
 import hashlib
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -326,7 +327,7 @@ class Post(db.Model):
             'author': url_for('api.get_user', id=self.author_id,
                               _external=True),
             'comments': url_for('api.get_post_comments', id=self.id,
-                                _external=True)
+                                _external=True),
             'comment_count': self.comments.count()
         }
         return json_post
