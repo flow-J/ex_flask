@@ -1,0 +1,76 @@
+{% extends "bootstrap/base.html" %}
+
+
+
+{% block head %}
+{{ super()}}
+<link rel="shortcut icon" href="{{ url_for('static', filename = 'favicon.ico')}}"
+    type="image/x-icon">　　　　　　　　　{#　文件夹名称 文件名 #}
+<link rel="icon" href="{{ url_for('static', filename = "favicon.ico")}}"
+    type = "image/x-icon">
+
+{% endblock  %}
+
+{% block title %}Flow~{% endblock %} {# title #}
+
+{% block navbar %}{# 按钮 #}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle"
+            data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Flasky</a>{# 这个是页面最左边的主页 #}
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/base">base</a></li> {#　这里只要填文件名就好了　扩展名.html之类的不需要  #}
+                <li><a href="/time">Time</a></li>
+                <li><a href="/user/<name>">user</a></li>
+                <li><a href="/email/">email</a></li>
+                <li><a href="">测试</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %} 
+
+    {% block page_content %}  Here is base page.    {% endblock %}
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+{{  super() }}
+{{　moment.include_moment() }}
+{% endblock %}
+
+
+{#
+<html>
+    <head>
+        {% block head %}
+        <title>{% block title %}{% endblock %} -My Application</title>
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+        <p> here is body</p>
+        {% endblock %}
+    </body>
+</html>
+#}

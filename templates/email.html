@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Flow~{% endblock %}
+
+{% block page_content %}
+<div class="text-center">
+    <h1>Welcome!</h1>
+</div>
+{{ wtf.quick_form(form) }}
+
+
+
+{% endblock %}
